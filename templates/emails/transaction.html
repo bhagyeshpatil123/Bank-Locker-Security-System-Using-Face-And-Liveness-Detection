@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction</title>
+</head>
+<body>
+    <div>
+        <p>Account Number : {{uqs.id}}</p>
+        <p>Name : {{uqs.name}}</p>
+        <p>Mobile : {{uqs.mobile}}</p>
+        <p>Email : {{uqs.email}}</p>
+        <p>Address : {{uqs.address}}</p>
+        <p>Balance : {{uqs.balance}}</p>
+    </div>
+    <table class="table table-bordered border-primary">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Transaction Id</th>
+          <th scope="col">Transfer To</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tr in debit %}
+            <tr>
+              <th scope="row">{{tr.id}}</th>
+              <td>{{tr.trans_to}}</td>
+              <td>{{tr.amount}}</td>
+              <td>{{tr.trans_on}}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <table class="table table-bordered border-primary">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Transaction Id</th>
+          <th scope="col">Receive From</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tr in deposit %}
+            <tr>
+              <th scope="row">{{tr.id}}</th>
+              <td>{{tr.trans_from}}</td>
+              <td>{{tr.amount}}</td>
+              <td>{{tr.trans_on}}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</body>
+</html>

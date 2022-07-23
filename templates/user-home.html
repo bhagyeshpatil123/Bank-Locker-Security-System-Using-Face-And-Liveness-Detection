@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagetitle %}Transaction{% endblock pagetitle %}
+
+{% block body %}
+<div class="center">
+    <form action="{% url 'index' %}" method="POST" class="row">
+        {% csrf_token %}
+        {% include 'user-navbar.html' %}
+        <center>
+            {% if messages %}
+                {% for msg in messages %}
+                <code>{{ msg }}</code>
+                {% endfor %}
+            {% endif %}
+        </center>
+
+        <div class="form-floating">
+          <input type="number" class="form-control" id="floatingAccount" placeholder="Account Number" name="accno" required="required" maxlength="10">
+          <label for="floatingAccount">Account Number</label>
+        </div>
+
+        <div class="form-floating">
+          <input type="number" class="form-control" id="floatingAmount" placeholder="Amount" name="amount" required="required" maxlength="10">
+          <label for="floatingAmount">Amount</label>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Send Money</button>
+        </div>
+    </form>
+    <table class="table table-bordered border-primary">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Transaction Id</th>
+          <th scope="col">Transfer To</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tr in debit %}
+            <tr>
+              <th scope="row">{{tr.id}}</th>
+              <td>{{tr.trans_to}}</td>
+              <td>{{tr.amount}}</td>
+              <td>{{tr.trans_on}}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <table class="table table-bordered border-primary">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Transaction Id</th>
+          <th scope="col">Receive From</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tr in deposit %}
+            <tr>
+              <th scope="row">{{tr.id}}</th>
+              <td>{{tr.trans_from}}</td>
+              <td>{{tr.amount}}</td>
+              <td>{{tr.trans_on}}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock body %}

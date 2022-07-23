@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagetitle %}User Signup{% endblock pagetitle %}
+
+{% block stylesheet %}
+<link href="{% static 'css/mystyle.css' %}" rel="stylesheet" type="text/css">
+{% endblock stylesheet %}
+
+{% block body %}
+<div class="center">
+    <form action="{% url 'user_signup' %}" method="POST">
+        {% csrf_token %}
+        <h2 class="text-center">User Registration</h2>
+        <center>
+            {% if messages %}
+                {% for msg in messages %}
+                <code>{{ msg }}</code>
+                {% endfor %}
+            {% endif %}
+        </center>
+
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingName" placeholder="User Name" name="name" required="required">
+          <label for="floatingName">User Name</label>
+        </div>
+
+        <div class="form-floating">
+          <input type="tel" class="form-control" id="floatingMobile" placeholder="User Mobile" name="mobile" required="required" maxlength="13">
+          <label for="floatingMobile">User Mobile</label>
+        </div>
+
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" name="email" required="required">
+          <label for="floatingEmail">User email</label>
+        </div>
+
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required="required">
+          <label for="floatingPassword">Password</label>
+        </div>
+
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingAddress" placeholder="User Address" name="address" required="required">
+          <label for="floatingName">User Address</label>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Signup</button>
+        </div>
+    </form>
+</div>
+{% endblock body %}

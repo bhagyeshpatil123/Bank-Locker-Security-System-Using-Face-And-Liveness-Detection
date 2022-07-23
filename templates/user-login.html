@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagetitle %}User Login{% endblock pagetitle %}
+
+{% block stylesheet %}
+<link href="{% static 'css/mystyle.css' %}" rel="stylesheet" type="text/css">
+{% endblock stylesheet %}
+
+{% block body %}
+<div class="center">
+    <form action="{% url 'user_login' %}" method="POST">
+        {% csrf_token %}
+        <h2 class="text-center">User Login</h2>
+        <center>
+            {% if messages %}
+                {% for msg in messages %}
+                <code>{{ msg }}</code>
+                {% endfor %}
+            {% endif %}
+        </center>
+
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" required="required">
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required="required">
+          <label for="floatingPassword">Password</label>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </div>
+        <div class="clearfix">
+            <p class="text-center"><a href="{% url 'user_signup' %}">Create an Account</a></p>
+        </div>
+    </form>
+</div>
+{% endblock body %}
